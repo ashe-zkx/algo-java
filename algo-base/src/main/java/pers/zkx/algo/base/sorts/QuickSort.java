@@ -24,7 +24,6 @@ public class QuickSort implements SortAlgoApi {
         if (left >= right) {
             return;
         }
-        System.out.println("doSort: left=" + left + ", right=" + right);
         int pivotIndex = partition(array, left, right);
         doSort(array, left, pivotIndex - 1);
         doSort(array, pivotIndex, right);
