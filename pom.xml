@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.module.version>1.0-SNAPSHOT</project.module.version>
         <assertj.version>3.27.3</assertj.version>
+        <lombok.version>1.18.28</lombok.version>
     </properties>
 
     <modules>
@@ -35,6 +36,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
