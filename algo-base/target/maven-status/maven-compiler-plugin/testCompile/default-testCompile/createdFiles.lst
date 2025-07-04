@@ -1,3 +1,7 @@
 pers/zkx/algo/base/structures/bloomfilter/BloomFilterTest.class
+pers/zkx/algo/base/structures/caches/LRUCacheTest.class
 pers/zkx/algo/base/sorts/SortAlgoApiTest.class
+pers/zkx/algo/base/utils/ArrayRandomUtilsTest.class
+pers/zkx/algo/base/structures/caches/LRUCacheWithTTLTest.class
 pers/zkx/algo/base/sorts/QuickSortTest.class
+pers/zkx/algo/base/structures/buffers/CircularBufferTest.class

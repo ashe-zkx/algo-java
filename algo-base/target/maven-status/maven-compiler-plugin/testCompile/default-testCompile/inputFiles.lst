@@ -1,3 +1,7 @@
 /home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/sorts/QuickSortTest.java
 /home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/sorts/SortAlgoApiTest.java
 /home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/structures/bloomfilter/BloomFilterTest.java
+/home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/structures/buffers/CircularBufferTest.java
+/home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/structures/caches/LRUCacheTest.java
+/home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/structures/caches/LRUCacheWithTTLTest.java
+/home/runner/work/algo-java/algo-java/algo-base/src/test/java/pers/zkx/algo/base/utils/ArrayRandomUtilsTest.java
