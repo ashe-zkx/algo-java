@@ -42,7 +42,8 @@ public class TokenBucket {
         if (tokensToAdd > 0) {
             tokens = Math.min(maxTokens, tokens + (int) tokensToAdd);
             // 只有实际添加令牌时才更新时间戳
-            lastRefill = now;
+            long nanosPerToken = TimeUnit.SECONDS.toNanos(1) / refillRate;
+            lastRefill += tokensToAdd * nanosPerToken;
         }
     }
 }
