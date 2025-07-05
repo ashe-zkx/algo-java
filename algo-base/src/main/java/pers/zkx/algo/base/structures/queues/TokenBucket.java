@@ -26,6 +26,12 @@ public class TokenBucket {
         this.lastRefill = System.nanoTime();
     }
 
+    /**
+     * 尝试允许一个请求。如果有令牌可用，则减少令牌数并允许请求。
+     * 否则，拒绝请求。
+     *
+     * @return 如果请求被允许则返回 true，否则返回 false。
+     */
     public synchronized boolean allowRequest() {
         refillTokens();
         if (tokens > 0) {
@@ -35,6 +41,10 @@ public class TokenBucket {
         return false;
     }
 
+    /**
+     * 补充令牌，根据自上次补充以来经过的时间和补充速率计算要添加的令牌数。
+     * 确保总令牌数不超过最大令牌数。
+     */
     private void refillTokens() {
         long now = System.nanoTime();
         long timeDiff = now - lastRefill;
