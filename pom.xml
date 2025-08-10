@@ -21,6 +21,8 @@
     <modules>
         <module>algo-base</module>
         <module>algo-leetcode</module>
+        <module>algo-thread</module>
+        <module>algo-raft</module>
     </modules>
 
     <dependencyManagement>
