@@ -24,7 +24,7 @@ hs_err_pid*
 replay_pid*
 
 # Build artifacts
-target/
+**/target/
 
 # IDE files
 .idea/
@@ -41,5 +41,3 @@ dependency-reduced-pom.xml
 
 # Test reports
 surefire-reports/
-
-
