@@ -21,6 +21,20 @@ public class Solution121 {
         return dp[prices.length - 1][1];
     }
 
+    public int maxProfit2(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[prices.length];
+        dp[0] = 0;
+        int minPrice = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            minPrice = Math.min(minPrice, prices[i]);
+            dp[i] = Math.max(dp[i - 1], prices[i] - minPrice);
+        }
+        return dp[prices.length - 1];
+    }
+
     public static void main(String[] args) {
         Solution121 solution121 = new Solution121();
         int[] prices = {7, 1, 5, 3, 6, 4};
