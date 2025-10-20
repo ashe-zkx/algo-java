@@ -24,6 +24,7 @@
         <module>algo-leetcode</module>
         <module>algo-thread</module>
         <module>algo-raft</module>
+        <module>algo-serialization</module>
     </modules>
 
     <dependencyManagement>
