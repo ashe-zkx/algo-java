@@ -5,17 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>pers.zkx</groupId>
-        <artifactId>algo-java</artifactId>
+        <artifactId>algo-learning</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>algo-test</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>algo-thread</artifactId>
 
-    <modules>
-        <module>algo-thread</module>
-        <module>algo-raft</module>
-        <module>algo-serializable</module>
-        <module>algo-rpc</module>
-    </modules>
+    <!-- Inherit compiler/lombok from parent -->
+    <dependencies>
+    </dependencies>
 </project>
