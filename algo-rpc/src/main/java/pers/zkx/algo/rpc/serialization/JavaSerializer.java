@@ -4,6 +4,14 @@ import java.io.*;
 
 /**
  * Java原生序列化实现
+ * 
+ * 警告：此实现使用Java原生序列化，存在已知的安全风险。
+ * 在生产环境中，建议使用更安全的序列化方案，如：
+ * - JSON (Jackson, Gson)
+ * - Protobuf
+ * - Hessian
+ * 
+ * 仅适用于受信任的网络环境和学习目的。
  */
 public class JavaSerializer implements Serializer {
 
