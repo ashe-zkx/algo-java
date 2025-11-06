@@ -1,6 +1,5 @@
 package pers.zkx.algo.rpc.server;
 
-import lombok.extern.slf4j.Slf4j;
 import pers.zkx.algo.rpc.common.RpcRequest;
 import pers.zkx.algo.rpc.common.RpcResponse;
 import pers.zkx.algo.rpc.common.ServiceInfo;
@@ -34,12 +33,16 @@ public class RpcServer {
     private volatile boolean running = false;
 
     public RpcServer(String host, int port, ServiceRegistry serviceRegistry) {
+        this(host, port, serviceRegistry, 10);
+    }
+
+    public RpcServer(String host, int port, ServiceRegistry serviceRegistry, int threadPoolSize) {
         this.host = host;
         this.port = port;
         this.serviceRegistry = serviceRegistry;
         this.serializer = new JavaSerializer();
         this.protocol = new SimpleRpcProtocol();
-        this.executor = Executors.newFixedThreadPool(10);
+        this.executor = Executors.newFixedThreadPool(threadPoolSize);
     }
 
     /**
@@ -143,5 +146,12 @@ public class RpcServer {
         
         executor.shutdown();
         System.out.println("RPC服务器已停止");
+    }
+
+    /**
+     * 检查服务器是否正在运行
+     */
+    public boolean isRunning() {
+        return running && serverSocket != null && !serverSocket.isClosed();
     }
 }

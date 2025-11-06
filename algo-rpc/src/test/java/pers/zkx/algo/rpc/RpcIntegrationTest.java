@@ -34,8 +34,17 @@ class RpcIntegrationTest {
         });
         serverThread.start();
         
-        // 等待服务器启动
-        Thread.sleep(500);
+        // 等待服务器启动，使用轮询检查
+        int maxRetries = 50;
+        int retryCount = 0;
+        while (!server.isRunning() && retryCount < maxRetries) {
+            Thread.sleep(100);
+            retryCount++;
+        }
+        
+        if (!server.isRunning()) {
+            throw new RuntimeException("服务器启动超时");
+        }
         
         // 创建客户端
         client = new RpcClient(registry);
