@@ -21,6 +21,7 @@
     <modules>
         <module>algo-base</module>
         <module>algo-leetcode</module>
+        <module>algo-rpc</module>
     </modules>
 
     <dependencyManagement>
