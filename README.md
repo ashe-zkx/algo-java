@@ -153,7 +153,7 @@ algo-java/
 
 ## 技术栈
 
-- **Java 版本**：21 (部分模块兼容 Java 17)
+- **Java 版本**：21
 - **构建工具**：Maven 3.x
 - **依赖管理**：BOM (Bill of Materials) 模式
 - **RPC 框架**：Apache Thrift 0.22.0
@@ -172,7 +172,6 @@ algo-java/
 ### 环境要求
 
 - JDK 21+（algo-leetcode 模块需要）
-- JDK 17+（其他模块）
 - Maven 3.6+
 - Apache Thrift 0.22.0（algo-api 模块生成代码需要）
 
