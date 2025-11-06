@@ -14,107 +14,68 @@
         <maven.compiler.target>21</maven.compiler.target>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.module.version>1.0-SNAPSHOT</project.module.version>
-        <assertj.version>3.27.3</assertj.version>
-        <lombok.version>1.18.34</lombok.version>
+        <thrift.version>0.22.0</thrift.version>
+        <maven.thrift.plugin.version>0.1.11</maven.thrift.plugin.version>
     </properties>
 
     <modules>
+        <module>algo-dependencies</module>
         <module>algo-base</module>
         <module>algo-leetcode</module>
-        <module>algo-thread</module>
-        <module>algo-raft</module>
-        <module>algo-serializable</module>
+        <module>algo-test</module>
         <module>algo-api</module>
-        <module>algo-rpc</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.13.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+            <!-- Import the BOM for dependency version management -->
             <dependency>
                 <groupId>pers.zkx</groupId>
-                <artifactId>algo-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <artifactId>algo-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.17.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.5.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.18.0</version>
-            <scope>test</scope>
-        </dependency>
-
+        <!-- Dependencies are managed via BOM in algo-dependencies module -->
     </dependencies>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <release>${maven.compiler.release}</release>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <fork>true</fork>
+                    <compilerArgs>
+                        <arg>-Xlint:-options</arg>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
-                    <configuration>
-                        <source>21</source>
-                        <target>21</target>
-                        <release>21</release>
-                        <encoding>UTF-8</encoding>
-                        <compilerArgs>
-                            <arg>-Xlint:-options</arg>
-                            <arg>-parameters</arg>
-                        </compilerArgs>
-                        <annotationProcessorPaths>
-                            <path>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok</artifactId>
-                                <version>${lombok.version}</version>
-                            </path>
-                        </annotationProcessorPaths>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.5.2</version>
-                    <configuration>
-                        <argLine>-Dfile.encoding=UTF-8</argLine>
-                    </configuration>
+                    <groupId>org.apache.thrift.tools</groupId>
+                    <artifactId>maven-thrift-plugin</artifactId>
+                    <version>${maven.thrift.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

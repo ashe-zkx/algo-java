@@ -9,37 +9,29 @@
     <artifactId>algo-api</artifactId>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <thrift.version>0.14.2</thrift.version>
-        <maven.thrift.plugin.version>0.1.11</maven.thrift.plugin.version>
+        <thrift.executable>thrift</thrift.executable>
     </properties>
 
     <dependencies>
-        <!-- Thrift runtime -->
         <dependency>
             <groupId>org.apache.thrift</groupId>
             <artifactId>libthrift</artifactId>
-            <version>${thrift.version}</version>
         </dependency>
-
-        <!-- Add test deps if needed -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
-            <!-- Thrift Maven Plugin: generate Java sources from .thrift -->
             <plugin>
                 <groupId>org.apache.thrift.tools</groupId>
                 <artifactId>maven-thrift-plugin</artifactId>
-                <version>${maven.thrift.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>thrift-sources</id>
@@ -51,24 +43,47 @@
                 </executions>
                 <configuration>
                     <generator>java</generator>
-                    <thriftExecutable>D:\Environment\thrift\thrift.exe</thriftExecutable>
-                    <!-- 可选: 如果 CI/开发机没有 thrift 可执行文件, 可以在本地先用 thrift CLI 生成源到 src/main/java -->
-                    <!-- <thriftExecutable>/usr/local/bin/thrift</thriftExecutable> -->
-                    <!-- 如果想把生成的代码放入特定目录，可通过 outputDirectory 指定 -->
-                    <!-- <outputDirectory>${project.build.directory}/generated-sources/thrift</outputDirectory> -->
-                </configuration>
-            </plugin>
-
-            <!-- Standard compiler plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <thriftExecutable>${thrift.executable}</thriftExecutable>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>thrift-windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <thrift.executable>D:\Environment\thrift\thrift.exe</thrift.executable>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>thrift-linux</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <thrift.executable>/usr/local/bin/thrift</thrift.executable>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>thrift-macos</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <thrift.executable>/opt/homebrew/bin/thrift</thrift.executable>
+            </properties>
+        </profile>
+    </profiles>
 </project>

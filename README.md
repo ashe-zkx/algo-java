@@ -1,9 +1,40 @@
 # algo-java
 使用java实现常用算法
+
 ## 模块介绍
-### base 基础算法模块
-### leetcode 刷题模块
-### rpc 简单RPC框架模块
+### algo-dependencies 依赖管理模块
+Bill of Materials (BOM) 模块，统一管理所有模块的依赖版本，确保版本一致性和易维护性。
+
+### algo-base 基础算法模块
+包含常用的数据结构和算法实现，如排序、搜索、缓存等。
+
+### algo-leetcode 刷题模块
+LeetCode 题解和算法练习。
+
+### algo-test 测试相关模块
+包含多个子模块：
+- **algo-thread**: 线程和并发编程相关实现
+- **algo-raft**: Raft 分布式一致性算法实现
+- **algo-serializable**: 序列化相关功能
+- **algo-rpc**: 简单RPC框架模块
+
+### algo-api API模块
+包含 Thrift 定义的 API 接口和生成的相关代码。
+
+## 依赖管理说明
+
+项目使用 Maven BOM (Bill of Materials) 进行全局依赖版本管理：
+
+- **algo-dependencies**: 专门的 BOM 模块，定义所有第三方依赖的版本
+- 根 pom.xml 通过 `<dependencyManagement>` 导入 BOM
+- 所有子模块无需指定版本号，版本由 BOM 统一管理
+
+这样可以：
+- 确保所有模块使用相同版本的依赖
+- 集中管理版本号，便于升级
+- 避免版本冲突和不一致
+
+## RPC框架详细说明
 
 实现了一个简单的RPC（远程过程调用）框架，包含以下核心功能：
 
@@ -61,4 +92,3 @@ String result = proxy.sayHello("World"); // 返回 "Hello, World!"
 - Java原生序列化存在已知的安全风险（反序列化漏洞）
 - 建议仅在受信任的网络环境中使用
 - 对于生产环境，建议替换为更安全的序列化方案（JSON、Protobuf等）
-

@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>pers.zkx</groupId>
-        <artifactId>algo-java</artifactId>
+        <artifactId>algo-test</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>algo-base</artifactId>
+    <artifactId>algo-thread</artifactId>
 
+    <!-- Inherit compiler/lombok from parent -->
     <dependencies>
     </dependencies>
 </project>
