@@ -1,68 +1,124 @@
-```markdown
-# thrift-api 模块
+# algo-api
 
-该模块包含 Thrift IDL（api.thrift）以及通过 Maven 生成的 Java API。
+## 模块说明
 
-目录结构（示例）：
+本模块包含 **Apache Thrift IDL 定义**和通过 Maven 自动生成的 Java API 代码。Thrift 用于定义跨语言的服务接口和数据结构。
+
+## 模块位置
+
 ```
-
-thrift-api/
+algo-api/
 ├── pom.xml
+├── README.md
 └── src/
-└── main/
-└── thrift/
-└── api.thrift
-
+    └── main/
+        └── thrift/
+            └── testUser.thrift
 ```
 
-如何生成 Java API（两种常用方式）：
+## IDL 定义
 
-方法 A：使用 Maven 插件（推荐）
-1. 在项目根目录运行（会执行 generate-sources 阶段并编译、打包）：
-```bash
-# 生成并安装到本地 Maven 仓库
-mvn -pl thrift-api -am install
-```
+`testUser.thrift` 定义了以下内容：
 
-解释：
+### 数据结构
+- **Address**: 地址信息（街道、城市、邮编）
+- **User**: 用户信息（ID、姓名、年龄、地址、爱好、元数据）
 
-- -pl thrift-api：只构建 thrift-api 模块
-- -am：同时构建依赖的模块（如果有）
-- install：完成构建并将 artifact 安装到本地仓库（~/.m2/repository）
+### 服务接口
+- **UserService**: 用户服务 API
+  - `getUserById()`: 根据 ID 查询用户
+  - `upsertUser()`: 创建或更新用户
+  - `listUsers()`: 分页查询用户列表
 
-生成的 Java 源码位置（默认）：
-
-- target/generated-sources/thrift/ 或 target/generated-sources (取决于插件版本)
-  编译时 Maven 会把生成目录加入到编译路径。
-
-方法 B：使用 thrift CLI 手动生成（当系统安装了 thrift 可执行文件时）
-
-```bash
-# 在模块目录下执行（将生成代码放到 src/main/java）
-thrift --gen java -out src/main/java src/main/thrift/api.thrift
-mvn -pl thrift-api -am install
-```
-
-使用说明（示例）：
-
-- 生成后，Java 包名为 `com.example.thrift.api`，可以在其他模块中通过依赖 thrift-api artifact 使用生成的类（User, Address, UserService 等）。
-- 如果你想把生成的 API 安装到本地仓库用于其他模块依赖：`mvn install` 即可（如上示例）。
-
-注意事项：
-
-- 确保使用的 libthrift 版本与 thrift 编译器版本兼容（建议一致）。
-- 在 CI 中，如果使用 maven-thrift-plugin，请保证 runner 环境可以找到 thrift 可执行文件，或在 CI 中通过 apt/brew 安装 thrift，或先将生成的代码 commit 到仓库（如果不能在 CI 上安装 thrift）。
-- plugin 的具体行为可能基于版本有所差异，若生成目录不同，请检查 target/generated-sources 目录并适配。
-
-示例：在另一个模块中依赖此模块（pom.xml 片段）
+## 依赖关系
 
 ```xml
+<dependencies>
+    <dependency>
+        <groupId>org.apache.thrift</groupId>
+        <artifactId>libthrift</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+    </dependency>
+</dependencies>
+```
 
+## 代码生成
+
+### 方法 A：使用 Maven 插件（推荐）
+
+在项目根目录运行：
+
+```bash
+mvn -pl algo-api -am install
+```
+
+参数说明：
+- `-pl algo-api`: 只构建 algo-api 模块
+- `-am`: 同时构建依赖的模块
+- `install`: 安装到本地 Maven 仓库 (~/.m2/repository)
+
+生成的代码位置：
+- `target/generated-sources/thrift/` 或 `target/generated-sources/`
+
+### 方法 B：使用 Thrift CLI 手动生成
+
+系统需安装 thrift 可执行文件：
+
+```bash
+cd algo-api
+thrift --gen java -out src/main/java src/main/thrift/testUser.thrift
+mvn install
+```
+
+## 跨平台配置
+
+本模块 `pom.xml` 包含了三个 profile，自动适配不同操作系统：
+
+- **Windows**: `D:\Environment\thrift\thrift.exe`
+- **Linux**: `/usr/local/bin/thrift`
+- **macOS**: `/opt/homebrew/bin/thrift`
+
+## 使用示例
+
+在其他模块中依赖本模块：
+
+```xml
 <dependency>
-    <groupId>com.example</groupId>
-    <artifactId>thrift-api</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <groupId>pers.zkx</groupId>
+    <artifactId>algo-api</artifactId>
 </dependency>
 ```
 
+生成的 Java 类可直接使用：
+
+```java
+import com.example.thrift.api.User;
+import com.example.thrift.api.Address;
+import com.example.thrift.api.UserService;
+
+// 创建用户对象
+User user = new User();
+user.setId("123");
+user.setName("张三");
 ```
+
+## 注意事项
+
+1. **版本兼容性**：确保 libthrift 版本与 thrift 编译器版本一致（当前为 0.22.0）
+2. **CI/CD 环境**：需要在 CI runner 上安装 thrift 可执行文件，或将生成的代码提交到仓库
+3. **代码生成**：Maven 会在 `generate-sources` 阶段自动生成代码
+
+## 优化建议
+
+1. **当前配置良好**：跨平台 profile 配置完善
+2. **建议改进**：
+   - 考虑将生成的代码提交到仓库，避免 CI 环境依赖 thrift 安装
+   - 可以添加更多业务相关的 IDL 定义
+   - 建议在 IDL 文件中添加详细的注释说明
