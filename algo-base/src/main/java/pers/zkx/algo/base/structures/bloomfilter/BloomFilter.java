@@ -16,7 +16,7 @@ public class BloomFilter<T> {
 
     private final int numberOfHashFunctions;
     private final BitSet bitArray;
-    private final Hash<T>[] hashFunctions;
+    private final Hash[] hashFunctions;
 
 
     /**

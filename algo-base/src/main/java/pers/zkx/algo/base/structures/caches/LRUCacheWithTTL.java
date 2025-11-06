@@ -1,7 +1,5 @@
 package pers.zkx.algo.base.structures.caches;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -200,8 +198,6 @@ public class LRUCacheWithTTL<K, V> {
         return evicted;
     }
 
-    @Getter
-    @Setter
     static final class Entry<I, J> {
         private Entry<I, J> preEntry;
         private Entry<I, J> nextEntry;
@@ -217,6 +213,46 @@ public class LRUCacheWithTTL<K, V> {
             this.nextEntry = nextEntry;
             this.key = key;
             this.value = value;
+        }
+
+        public Entry<I, J> getPreEntry() {
+            return preEntry;
+        }
+
+        public void setPreEntry(Entry<I, J> preEntry) {
+            this.preEntry = preEntry;
+        }
+
+        public Entry<I, J> getNextEntry() {
+            return nextEntry;
+        }
+
+        public void setNextEntry(Entry<I, J> nextEntry) {
+            this.nextEntry = nextEntry;
+        }
+
+        public I getKey() {
+            return key;
+        }
+
+        public void setKey(I key) {
+            this.key = key;
+        }
+
+        public J getValue() {
+            return value;
+        }
+
+        public void setValue(J value) {
+            this.value = value;
+        }
+
+        public long getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(long timestamp) {
+            this.timestamp = timestamp;
         }
     }
 }

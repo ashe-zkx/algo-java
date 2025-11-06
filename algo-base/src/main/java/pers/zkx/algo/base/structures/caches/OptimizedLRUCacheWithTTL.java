@@ -1,8 +1,5 @@
 package pers.zkx.algo.base.structures.caches;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -287,8 +284,6 @@ public class OptimizedLRUCacheWithTTL<K, V> {
         }
     }
 
-    @Getter
-    @Setter
     static final class Entry<K, V> {
         private Entry<K, V> preEntry;
         private Entry<K, V> nextEntry;
