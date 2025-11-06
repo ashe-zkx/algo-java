@@ -26,6 +26,7 @@
         <module>algo-raft</module>
         <module>algo-serializable</module>
         <module>algo-api</module>
+        <module>algo-rpc</module>
     </modules>
 
     <dependencyManagement>
