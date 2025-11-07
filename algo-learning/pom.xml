@@ -5,12 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>pers.zkx</groupId>
-        <artifactId>algo-test</artifactId>
+        <artifactId>algo-java</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>algo-raft</artifactId>
+    <artifactId>algo-learning</artifactId>
+    <packaging>pom</packaging>
 
-    <dependencies>
-    </dependencies>
+    <modules>
+        <module>algo-thread</module>
+        <module>algo-raft</module>
+        <module>algo-serializable</module>
+        <module>algo-rpc</module>
+    </modules>
 </project>

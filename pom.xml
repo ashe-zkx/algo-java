@@ -22,7 +22,7 @@
         <module>algo-dependencies</module>
         <module>algo-base</module>
         <module>algo-leetcode</module>
-        <module>algo-test</module>
+        <module>algo-learning</module>
         <module>algo-api</module>
     </modules>
 
