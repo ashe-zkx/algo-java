@@ -32,6 +32,7 @@
             <plugin>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>thrift-maven-plugin</artifactId>
+                <version>0.21.0</version>
                 <executions>
                     <execution>
                         <id>thrift-sources</id>

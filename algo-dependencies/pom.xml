@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Algo Dependencies BOM</name>
+    <name>algo-dependencies</name>
     <description>Bill of Materials for managing dependency versions across all modules</description>
 
     <properties>
@@ -22,6 +22,8 @@
         <junit.version>4.13.2</junit.version>
         <junit-jupiter.version>5.13.2</junit-jupiter.version>
         <assertj.version>3.27.3</assertj.version>
+        <!-- Keep thrift.version for reference, but use a literal version below to satisfy Maven validation -->
+        <thrift.version>0.21.0</thrift.version>
     </properties>
 
     <dependencyManagement>
@@ -50,7 +52,8 @@
             <dependency>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
-                <version>${thrift.version}</version>
+                <!-- Use a fixed version to avoid property resolution issues during BOM import -->
+                <version>0.21.0</version>
             </dependency>
 
             <!-- Annotations -->
