@@ -1,5 +1,4 @@
-package pers.zkx.algo.string;
-
+package pers.zkx.algo.benchmark.string;
 
 public class Item {
     private final String f1;
@@ -27,17 +26,14 @@ public class Item {
         this.id = id;
     }
 
-    // 新增：使用 String.format 构造 id
     public void buildIdByFormat() {
         this.id = String.format("%s-%d", this.f1, this.f2);
     }
 
-    // 新增：使用 + 拼接构造 id
     public void buildIdByPlus() {
         this.id = this.f1 + "-" + this.f2;
     }
 
-    // 新增：使用 StringBuilder 构造 id（与 + 操作效果接近，但更显式）
     public void buildIdByBuilder() {
         this.id = new StringBuilder(16)
                 .append(this.f1)
@@ -70,3 +66,4 @@ public class Item {
                '}';
     }
 }
+
